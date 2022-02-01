@@ -23,7 +23,17 @@ namespace CryptDetect.Controllers
             return View();
         }
 
-        public IActionResult Privacy()
+        public IActionResult Download()
+        {
+            return View();
+        }
+
+        public IActionResult GitHub()
+        {
+            return Redirect("https://github.com/Hendo16/CryptDetect");
+        }
+
+        public IActionResult About()
         {
             return View();
         }
