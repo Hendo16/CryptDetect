@@ -90,21 +90,25 @@
 </div>
 
 <!--Upload File Modal-->
-<div class="modal fade" id="UploadFileModal" tabindex="-1" role="dialog" aria-labelledby="UploadFileModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="UploadFileModalLabel">Please submit files</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <p>Temporary Modal - will be default browser file select when back-end is implemented.</p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Back</button>
+<form method="post" enctype="multipart/form-data" asp-controller="Detector" asp-action="FileScan">
+    <div class="modal fade" id="UploadFileModal" tabindex="-1" role="dialog" aria-labelledby="UploadFileModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="UploadFileModalLabel">Please submit files</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>Temporary Modal - will be default browser file select when back-end is implemented.</p>
+                    <input type="file" name="files" multiple />
+                </div>
+                <div class="modal-footer">
+                    <input type="submit" class="btn btn-secondary" value="Submit" />
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Back</button>
+                </div>
             </div>
         </div>
     </div>
-</div>
+</form>
