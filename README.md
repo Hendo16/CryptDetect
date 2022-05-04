@@ -5,14 +5,20 @@ Project to detect potential cryptographic algorithms that have been used in a gi
 
 # Installation Guide
 You will need to install the following to operate these frontend files:
+
 .NET SDK's:
+
     .NET Core 3.1:  https://dotnet.microsoft.com/en-us/download/dotnet/3.1
+    
     .NET 5.0:       https://dotnet.microsoft.com/en-us/download/dotnet/5.0
+    
     .NET 6.0:       https://dotnet.microsoft.com/en-us/download/dotnet/6.0
 
 
 IDE:
+
     Visual Studio: https://visualstudio.microsoft.com/downloads
+    
     Visual Studio Code: https://code.visualstudio.com/download
 
 
