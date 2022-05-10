@@ -41,6 +41,7 @@ namespace CryptDetect.Controllers
             var fPaths = new List<string>();
             foreach (var file in files)
             {
+                string ext = Path.GetExtension(file.FileName);
                 if(file.Length > 0)
                 {
                     var fPath = Path.GetTempFileName();
@@ -67,6 +68,28 @@ namespace CryptDetect.Controllers
             TempData[ID] = results["data"].ToString();
 
 
+
+            return RedirectToAction("Results", new { ID });
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> TextScan(string text)
+        {
+            string ID = Guid.NewGuid().ToString();
+            string fPath = System.IO.Path.GetTempPath() + ID + ".txt";
+            using (var stream = new StreamWriter(fPath))
+            {
+                await stream.WriteAsync(text);
+            }
+            JObject results = await upload_files_testAsync(new List<string> {fPath});
+
+            //No Match Found
+            if (results["code"].ToString() == "404")
+            {
+                return RedirectToAction("Error");
+            }
+
+            TempData[ID] = results["data"].ToString();
 
             return RedirectToAction("Results", new { ID });
         }
@@ -110,9 +133,9 @@ namespace CryptDetect.Controllers
             var response = await client.PostAsync(new Uri("http://124.222.155.154:8001/file_upload"),content);
             var result = await response.Content.ReadAsStringAsync();
             return JObject.Parse(result);
-        }
 
-        public IActionResult Error()
+        }
+public IActionResult Error()
         {
             return View();
         }

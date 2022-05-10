@@ -68,18 +68,24 @@
 </div>
 
 <!--Text Source Code Modal-->
-<div class="modal fade" id="TextCodeModal" tabindex="-1" role="dialog" aria-labelledby="TextCodeModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="TextCodeModalLabel">Please enter Source Code</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <div class="form-group">
-                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="10"></textarea>
+<form method="post" enctype="multipart/form-data" name="TextForm" asp-controller="Detector" asp-action="TextScan">
+    <div class="modal fade" id="TextCodeModal" tabindex="-1" role="dialog" aria-labelledby="TextCodeModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="TextCodeModalLabel">Please enter Source Code</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <textarea class="form-control" form="TextForm" id="CodeTextArea" name="text" rows="10"></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Back</button>
+                    <input type="submit" class="btn btn-secondary" value="Analyze" />
                 </div>
             </div>
             <div class="modal-footer">
@@ -88,7 +94,7 @@
             </div>
         </div>
     </div>
-</div>
+</form>
 
 <!--Upload File Modal-->
 <form method="post" enctype="multipart/form-data" asp-controller="Detector" asp-action="FileScan">
