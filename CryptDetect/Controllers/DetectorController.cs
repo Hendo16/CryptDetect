@@ -12,6 +12,19 @@ using Newtonsoft.Json.Linq;
 using CryptDetect.Models;
 using Newtonsoft.Json;
 
+public static  class common // static 不是必须
+
+{
+
+    private static string name = "cc";
+    public static string Name
+    {
+        get { return name;}
+        set { name = value;}
+    }
+
+}
+
 namespace CryptDetect.Controllers
 {
     public class DetectorController : Controller
@@ -31,6 +44,8 @@ namespace CryptDetect.Controllers
                 if(file.Length > 0)
                 {
                     var fPath = Path.GetTempFileName();
+                    var fName = file.FileName;
+                    common.Name = fName;
                     fPaths.Add(fPath);
 
                     using(var stream = new FileStream(fPath, FileMode.Create))
@@ -81,16 +96,18 @@ namespace CryptDetect.Controllers
             //NEED TO UPDATE FOR MULTIPLE FILES, ONLY WORKS FOR A SINGLE FILE RIGHT NOW
             //THIS IS ONLY FOR A SINGLE FILE, NEED TO FIGURE OUT HOW TO APPEND MULTIPLE FILES TO THE BODY
             string filename = files[0];
+            var fName = common.Name;
+
             var client = new HttpClient { 
-                BaseAddress = new Uri("http://127.0.0.1:8001")
+                BaseAddress = new Uri("http://124.222.155.154:8001")
                 };
             await using var stream = System.IO.File.OpenRead(filename);
             using var content = new MultipartFormDataContent
             {
-                {new StreamContent(stream), "files", "\test.py" }
+                {new StreamContent(stream), "files", "\\" + fName }
             };
 
-            var response = await client.PostAsync(new Uri("http://127.0.0.1:8001/file_upload"),content);
+            var response = await client.PostAsync(new Uri("http://124.222.155.154:8001/file_upload"),content);
             var result = await response.Content.ReadAsStringAsync();
             return JObject.Parse(result);
         }
