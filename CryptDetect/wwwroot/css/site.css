@@ -62,6 +62,19 @@ html {
 body {
     /* Margin bottom by footer height */
     margin-bottom: 60px;
+
+    /* Background Image */
+    background-image: url('/Images/CryptDetectBackground.gif');
+    background-size: 100%;
+    background-repeat: repeat-y;
+    background-attachment: fixed;
+}
+p {
+    color: white;
+}
+
+h3 {
+    color: white;
 }
 .footer {
   position: absolute;
