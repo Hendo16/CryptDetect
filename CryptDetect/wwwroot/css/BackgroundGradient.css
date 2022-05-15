@@ -1,4 +1,11 @@
 ﻿body {
-    background: rgb(94,99,63);
-    background: linear-gradient(0deg, rgba(94,99,63,0.35325973943957023) 36%, rgba(103,128,96,0.6876445974837342) 55%, rgba(0,107,129,1) 93%);
+    /*background: rgb(94,99,63);
+    background: linear-gradient(0deg, rgba(94,99,63,0.35325973943957023) 36%, rgba(103,128,96,0.6876445974837342) 55%, rgba(0,107,129,1) 93%);*/
+
+    background-image: url('/Images/CryptDetectBackground.gif');
+    background-size: 100%;
+    background-repeat: repeat-y;
+    background-attachment: fixed;
+    height: 100%;
+    width: 100%;
 }
