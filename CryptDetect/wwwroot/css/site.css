@@ -25,6 +25,17 @@ a {
   border-color: #1861ac;
 }
 
+.nav-item:hover {
+    background: #c405e6;
+    transition: 200ms linear;
+    
+}
+.nav-link:hover{
+    color: white
+}
+
+
+
 /* Sticky footer styles
 -------------------------------------------------- */
 html {
@@ -70,10 +81,12 @@ body {
     background-attachment: fixed;
 }
 p {
+    /* Text color */
     color: white;
 }
 
 h3 {
+    /* Text color */
     color: white;
 }
 .footer {
