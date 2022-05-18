@@ -75,7 +75,7 @@ body {
     /* Background Image */
     background-image: url('/Images/CryptDetectBackground.gif');
     background-size: 100%;
-    background-repeat: repeat-y;
+    background-repeat: repeat;
     background-attachment: fixed;
 }
 p {
