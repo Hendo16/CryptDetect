@@ -1,0 +1,9 @@
+﻿.navbar {
+    display: none;
+}
+body {
+    background-image: url('/Images/analyse-background.gif');
+    background-size: 100%;
+    background-repeat: repeat;
+    background-attachment: fixed;
+}
