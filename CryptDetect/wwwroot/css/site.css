@@ -1,16 +1,6 @@
 ﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
 for details on configuring this project to bundle and minify static web assets. */
 
-a.navbar-brand {
-  white-space: normal;
-  text-align: center;
-  word-break: break-all;
-}
-
-/* Provide sufficient contrast against white background */
-a {
-  color: #0366d6;
-}
 
 .btn-primary {
   color: #fff;
@@ -18,11 +8,115 @@ a {
   border-color: #1861ac;
 }
 
+.about {
+  display: inline-block;
+  text-align: center;
+  vertical-align: middle;
+  user-select: none;
+  border: 1px solid transparent;
+  padding: 0.375rem 0.75rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  border-radius: 0.25rem;
+  transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+  color: #fff;
+  background-color: transparent;
+}
+
+
+.about:hover {
+  color: #fff;
+  font-size: 1rem;
+  background: #c405e6;
+  transition: 200ms linear;
+
+}
+
+
+.scanButton {
+  color:#fff;
+  background-color: transparent;
+  border: none;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 16px;
+}
+
+
+.scanButton:hover {
+  color: #fff;
+  background-color: #c405e6;
+  transition: 200ms linear;
+}
+
+
 .nav-pills .nav-link.active, .nav-pills .show > .nav-link {
   color: #fff;
   background-color: #1b6ec2;
   border-color: #1861ac;
 }
+
+.nav-item:hover {
+    background: #c405e6;
+    transition: 200ms linear;
+    
+}
+.nav-link:hover{
+    color: white
+}
+
+.footer {
+  padding-top: 10px;
+  background-color: #87338f;
+  color: #ffffff;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  white-space: nowrap;
+  line-height: 60px;
+  /* Vertically center the text there */
+}
+
+.footer-basic ul {
+  padding: 0;
+  list-style: none;
+  text-align: center;
+  font-size: 18px;
+  line-height: 1.6;
+  margin-bottom: 0;
+}
+
+.footer-basic li {
+  padding: 0 10px;
+}
+
+.footer-basic ul a {
+  color: inherit;
+  text-decoration: none;
+  opacity: 0.8;
+}
+
+.footer-basic ul a:hover {
+  opacity: 1;
+}
+
+
+.footer-basic .copyright {
+  margin-top: 0;
+  text-align: center;
+  font-size: 20px;
+  color: #aaa;
+  margin-bottom: 0;
+}
+
+.footer-basic .footerUowLogo {
+  align: right;
+}
+
 
 /* Sticky footer styles
 -------------------------------------------------- */
@@ -61,11 +155,19 @@ html {
 body {
     /* Margin bottom by footer height */
     margin-bottom: 60px;
+    /* Background Image */
+    background-image: url('/Images/CryptDetectBackground.gif');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    
 }
-.footer {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  white-space: nowrap;
-  line-height: 60px; /* Vertically center the text there */
+p {
+    /* Text color */
+    color: white;
+}
+
+h3 {
+    /* Text color */
+    color: white;
 }

@@ -28,9 +28,10 @@ namespace CryptDetect.Controllers
             var fPaths = new List<string>();
             foreach (var file in files)
             {
+                string ext = Path.GetExtension(file.FileName);
                 if(file.Length > 0)
                 {
-                    var fPath = Path.GetTempFileName();
+                    string fPath = System.IO.Path.GetTempPath() + Guid.NewGuid().ToString() + ext;
                     fPaths.Add(fPath);
 
                     using(var stream = new FileStream(fPath, FileMode.Create))
@@ -52,6 +53,28 @@ namespace CryptDetect.Controllers
             TempData[ID] = results["data"].ToString();
 
 
+
+            return RedirectToAction("Results", new { ID });
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> TextScan(string text)
+        {
+            string ID = Guid.NewGuid().ToString();
+            string fPath = System.IO.Path.GetTempPath() + ID + ".txt";
+            using (var stream = new StreamWriter(fPath))
+            {
+                await stream.WriteAsync(text);
+            }
+            JObject results = await upload_files_testAsync(new List<string> {fPath});
+
+            //No Match Found
+            if (results["code"].ToString() == "404")
+            {
+                return RedirectToAction("Error");
+            }
+
+            TempData[ID] = results["data"].ToString();
 
             return RedirectToAction("Results", new { ID });
         }
@@ -78,24 +101,27 @@ namespace CryptDetect.Controllers
 
         public async Task<JObject> upload_files_testAsync(List<string> files)
         {
-            //NEED TO UPDATE FOR MULTIPLE FILES, ONLY WORKS FOR A SINGLE FILE RIGHT NOW
-            //THIS IS ONLY FOR A SINGLE FILE, NEED TO FIGURE OUT HOW TO APPEND MULTIPLE FILES TO THE BODY
-            string filename = files[0];
             var client = new HttpClient { 
-                BaseAddress = new Uri("http://127.0.0.1:8001")
+            BaseAddress = new Uri("http://124.222.155.154:8001")
                 };
-            await using var stream = System.IO.File.OpenRead(filename);
-            using var content = new MultipartFormDataContent
-            {
-                {new StreamContent(stream), "files", "\test.py" }
-            };
 
-            var response = await client.PostAsync(new Uri("http://127.0.0.1:8001/file_upload"),content);
+            MultipartFormDataContent content_stream = new MultipartFormDataContent();
+
+            foreach (var file in files)
+            {
+                var filename = Path.GetFileName(file);
+                var stream = System.IO.File.OpenRead(file);
+                content_stream.Add(new StreamContent(stream), "files", @"\"+filename);
+            }
+
+            using var content = content_stream;
+
+            var response = await client.PostAsync(new Uri("http://124.222.155.154:8001/file_upload"),content);
             var result = await response.Content.ReadAsStringAsync();
             return JObject.Parse(result);
-        }
 
-        public IActionResult Error()
+        }
+public IActionResult Error()
         {
             return View();
         }

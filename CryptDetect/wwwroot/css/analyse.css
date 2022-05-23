@@ -1,0 +1,24 @@
+﻿/*.navbar {
+    display: none;
+}
+body {
+    background-image: url('/Images/analyse-background.gif');
+    background-size: 100%;
+    background-repeat: repeat;
+    background-attachment: fixed;
+}*/
+
+.box {
+    padding-top: 10%;
+    margin: 0 auto;
+    border-radius: 25px;
+}
+.box img {
+    border-radius: 15px;
+ }
+
+
+.navbar {
+    display: none;
+}
+ 

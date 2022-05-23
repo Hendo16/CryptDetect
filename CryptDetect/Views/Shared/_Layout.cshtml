@@ -4,61 +4,95 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - CryptDetect</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <!-- Calls our css stylesheet that we have labeled as: site.css
+         This contains our custom styles -->
     <link rel="stylesheet" href="~/css/site.css" />
-    <link rel="stylesheet" href="~/css/BackgroundGradient.css" />
+    <!-- Calls our css stylesheet that we have labeled as: bootstrap.min.css
+         This contains our bootstrap system that handles the scaling of our site -->
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" /> 
 </head>
 <body>
+    <!-- Container for Header 
+         The nav bar and it's items are contained here in an unordered list -->
     <header>
+        <!--  -->
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light border-0 border-light">
-            <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index"><img src="/Images/Banner-Test.png" alt="CryptDetect" class="navbar-brand float-left" width="200"/></a>
+            <div class="container-fluid p-0">
+                <!--  -->
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index"><img src="/Images/logo.png" alt="CryptDetect" class="navbar-brand" width="225"/></a>
+                <!--  -->
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
 
-                    <ul class="navbar-nav ">
-                        
-                        <li class="nav-item border border-light rounded-pill pl-5 pr-5">
-                            <a class="nav-link text-light" asp-area="" asp-controller="Detector" asp-action="Index" asp-action="Try Now">Try Now</a>
-                          
+                <!--  -->
+                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row">
+                    <ul class="navbar-nav">
+                        <!-- Nav-Item: Try Now -->
+                        <li class="nav-item rounded-pill pl-5 pr-5">
+                            <a class="nav-link text-white" asp-area="" asp-controller="Detector" asp-action="Index" asp-action="Try Now"><span>Scan</span></a> 
                         </li>
 
-                        <!--Download button is inteaded to be removed in end version patch. TODO: Find and remove the handler for downloads page-->
-                        <!--
-                        
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Download">Download</a>
+                        <!-- Nav-Item: Github -->
+                        <li class="nav-item ml-4 rounded-pill pl-5 pr-5" >
+                            <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="GitHub"><span>GitHub</span></a>
                         </li>
 
-                        -->
-
-                        <li class="nav-item border border-light ml-4 rounded-pill pl-5 pr-5" >
-                            <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="GitHub">GitHub</a>
-                        </li>
-
-
-                        <li class="nav-item border border-light ml-4 rounded-pill pl-5 pr-5">
-                            <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="About">About Us</a>
+                        <!-- Nav-Item: About Us -->
+                        <li class="nav-item ml-4 rounded-pill pl-5 pr-5">
+                            <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="About"><span>About Us</span></a>
                         </li>
                     </ul>
                 </div>
             </div>
         </nav>
     </header>
+
+    <!-- Container for Main 
+         The RenderBody() process here from Razor -->
     <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2022 - CryptDetect
-        </div>
-    </footer>
+    <!-- Footer 
+         Contains Project Name along with publishing year.
+         Links to UOW
+         Links to Contact Us -->
+    
+    <div class="footer-basic">
+        <footer class="footer">
+            <table class="footer-table" width="100%">
+                <tr>
+                    <td width="33%">
+                        <p class="copyright">&copy; 2022 - CryptDetect</p>
+                    </td>
+
+                    <td width="33%">
+                        <ul class="list-inline">
+                            <li class="list-inline-item"><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
+                            <li class="list-inline-item"><a asp-area="" asp-controller="Detector" asp-action="Index" asp-action="Try Now">Services</a></li>
+                            <li class="list-inline-item"><a href="mailto:tristgardner@gmail.com">Contact Us</a></li>
+                        </ul>
+                    </td>
+
+                    <td width="34%" align="right">
+                        <a class="footerUowLogo" href="https://www.uow.edu.au/"><img src="/Images/uow-logo-secondary-transparent.PNG" width="200px"/></a>
+                    </td>
+                </tr>
+            </table>
+                
+                
+                    
+        </footer>
+    </div>
+
+    <!-- Javascript Scripts
+         bootstrap.bundle.min.js
+         site.js
+         jquery.min.js  -->
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>

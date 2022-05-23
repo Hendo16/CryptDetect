@@ -4,6 +4,10 @@
     ViewData["Spacing"] = "mb-2";
 }
 
+<link rel="stylesheet" href="~/css/site.css" />
+
+
+
 <div class="container">
     <div class="row">
         <div class="col">
@@ -11,7 +15,7 @@
             </h3>
         </div>
         <div class="col">
-            <button type="button" class="btn btn-primary @ViewData["Spacing"]" data-toggle="modal" data-target="#UploadFileModal">
+            <button type="button" class="scanButton @ViewData["Spacing"]" data-toggle="modal" data-target="#UploadFileModal">
                 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="41" height="50" viewBox="0 0 41 50">
                     <defs>
                         <pattern id="uppattern" preserveAspectRatio="none" width="100%" height="100%" viewBox="0 0 23 28">
@@ -23,7 +27,7 @@
                 Upload File
                 </button>
                 <br />
-                <button type="button" class="btn btn-primary @ViewData["Spacing"]" data-toggle="modal" data-target="#GitHubModal">
+                <button type="button" class="scanButton @ViewData["Spacing"]" data-toggle="modal" data-target="#GitHubModal">
                     <svg id="github" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="51" height="51" viewBox="0 0 51 51">
                         <defs>
                             <pattern id="gitpattern" preserveAspectRatio="none" width="100%" height="100%" viewBox="0 0 51 51">
@@ -35,7 +39,7 @@
                     Scan GitHub Repository
                 </button>
                 <br />
-                <button type="button" class="btn btn-primary @ViewData["Spacing"]" data-toggle="modal" data-target="#TextCodeModal">
+                <button type="button" class="scanButton @ViewData["Spacing"]" data-toggle="modal" data-target="#TextCodeModal">
                     <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="49" height="51" viewBox="0 0 49 51">
                         <image id="github_3_" data-name="github (3)" width="49" height="51" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADEAAAAzCAYAAAA+VOAXAAAAAXNSR0IArs4c6QAAA6N0RVh0bXhmaWxlACUzQ214ZmlsZSUyMGhvc3QlM0QlMjJhcHAuZGlhZ3JhbXMubmV0JTIyJTIwbW9kaWZpZWQlM0QlMjIyMDIxLTEwLTEyVDA4JTNBNTMlM0E0NS4xNjdaJTIyJTIwYWdlbnQlM0QlMjI1LjAlMjAoV2luZG93cyUyME5UJTIwMTAuMCUzQiUyMFdpbjY0JTNCJTIweDY0KSUyMEFwcGxlV2ViS2l0JTJGNTM3LjM2JTIwKEtIVE1MJTJDJTIwbGlrZSUyMEdlY2tvKSUyMENocm9tZSUyRjk0LjAuNDYwNi43MSUyMFNhZmFyaSUyRjUzNy4zNiUyMiUyMGV0YWclM0QlMjI5c0gzSWFFMWxOd2JWYThqeTR0eCUyMiUyMHZlcnNpb24lM0QlMjIxNS41LjElMjIlMjB0eXBlJTNEJTIyZGV2aWNlJTIyJTNFJTNDZGlhZ3JhbSUyMGlkJTNEJTIybUtQVmlyNVNwbFYzNmgta0FtZk8lMjIlMjBuYW1lJTNEJTIyUGFnZS0xJTIyJTNFalpOTmI0SkFFSVolMkZEY2NhV0dyc3RWcmJIalF4TlUwJTJGTG1hRkZUWlpHTElNQ3Y3NkRtVVdKTWJFa3p2UGZQTE82SVdMckg2enNralhFQ3ZqQ1QlMkJ1dmZERkV5SVF3cWVmbGpSTSUyRk9tMEk0blZNYk1CYlBWWnVVQ21sWTVWT1FwRUFJTzZHTU1JOGx4Rk9HTFNXamlOd3c1Z3hsMExtYWdyc0kya3VhWmZPc2EwbzA5VGYlMkJEdlNpZXA2eHo0N01ta0MyWlFwaktHMHdVS2wxNjRzQURZdmJKNm9VeXJudE9seTN1OTRlMEhzeXJIZXhLJTJCc2RyODJzOWklMkZiR3FkdmxQSSUyQmF6OGtGMFZZN1NWUHpCUEN3MlRvR2pzcWhKa0pYY0s3T0JVcU9HbkZ4N1FJVE1DJTJCY3Bab2JzZ0o0dTl0bm9wSTFCS0loS3RpS2FWRmtDSkVYUlZzJTJGcXBEMmJpVHhYVmswaXVwN2RRYmQ5NXdYb05uWjVwSlNTaSUyRk9vMUVMVk56VUllbVhwSmhWa0NtMURJWnpRTDRQUFVjellQZzI3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" />
                     </svg>
@@ -91,8 +95,6 @@
 </div>
 
 <!--Upload File Modal-->
-<!-- localhost/Detector
-     this code is related to the drop down box that comes up when the user clicks on the Upload file button. -->
 <form method="post" enctype="multipart/form-data" asp-controller="Detector" asp-action="FileScan">
     <div class="modal fade" id="UploadFileModal" tabindex="-1" role="dialog" aria-labelledby="UploadFileModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
