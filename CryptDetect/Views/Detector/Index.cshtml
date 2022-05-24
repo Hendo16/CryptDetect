@@ -51,27 +51,29 @@
     </div>
 </div>
 <!--GitHub Modal-->
-<div class="modal fade" id="GitHubModal" tabindex="-1" role="dialog" aria-labelledby="GitHubModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="GitHubModalLabel">Please Enter GitHub Repository</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <div class="form-group">
-                    <input class="form-control" id="GitHubRepoInput" placeholder="https://github.com/Hendo16/CryptDetect.git">
+<form method="post" asp-controller="Detector" asp-action="GithubScan">
+    <div class="modal fade" id="GitHubModal" tabindex="-1" role="dialog" aria-labelledby="GitHubModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="GitHubModalLabel">Please Enter GitHub Repository</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
                 </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Back</button>
-                <button type="button" class="btn btn-primary">Analyse</button>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <input name="URL" class="form-control" id="GitHubRepoInput" placeholder="https://github.com/Hendo16/CryptDetect.git">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Back</button>
+                    <button id="btnSubmit"  type="submit" class="btn btn-primary">Analyse</button>
+                </div>
             </div>
         </div>
     </div>
-</div>
+</form>
 
 <!--Text Source Code Modal-->
 <form method="post" asp-controller="Detector" asp-action="TextScan">
@@ -91,7 +93,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Back</button>
-                    <button type="submit" class="btn btn-primary" >Analyse</button>
+                    <button id="btnSubmit" type="submit" class="btn btn-primary" >Analyse</button>
                 </div>
             </div>
         </div>
@@ -114,7 +116,7 @@
                     <input type="file" name="files" multiple />
                 </div>
                 <div class="modal-footer">
-                    <input type="submit" class="btn btn-secondary" value="Submit" />
+                    <button type="submit" class="btn btn-primary" id="btnSubmit" >Submit</button>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Back</button>
                 </div>
             </div>
@@ -130,8 +132,8 @@
             <div class="modal-body">
                 <div class="container-fluid">
                     <div class="row">
-                        <div class="col-md-4">
-                            <img src="./Images/analyse-background.gif"/>
+                        <div class="col-md-5 offset-md-5">
+                            <img src="./Images/loading.gif"/>
                         </div>
                     </div>
                     <div class="row">
@@ -148,11 +150,19 @@
     </div>
 </div>
 <script>
+$("#btnSubmit").click(function(e) {
+    $('#GitHubModal').modal('hide');
+    $('#TextCodeModal').modal('hide');
+    $('#UploadFileModal').modal('hide');
+    $('#loadingModal').modal('toggle');
+    load();
+});
+
 const timer = ms => new Promise(res => setTimeout(res, ms))
 async function load () {
     var count = 0;
     var base_text = "Analysing your source code";
-    var max_time = 30;
+    var max_time = 120;
     while (count < max_time) {
         //Incremental Text Updates
         if (count >= 12) {
@@ -162,8 +172,7 @@ async function load () {
             base_text = "Wanna grab a coffee?"
         }
         if (count == max_time) {
-            //Handle finished results
-            document.getElementById("loading_text").textContent = "Done!";
+            document.getElementById("loading_text").textContent = "Almost there";
         }
         else {
             for (var i = 0; i < 3; i++) {

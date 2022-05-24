@@ -87,6 +87,25 @@ namespace CryptDetect.Controllers
             return RedirectToAction("Results", new { ID });
         }
 
+        [HttpPost]
+        public async Task<IActionResult> GithubScan(string URL)
+        {
+            //Pull files from the repo
+            string ID = Guid.NewGuid().ToString();
+
+            JObject results = await submitGithub(URL, ID);
+
+            //No Match Found
+            if (results["code"].ToString() == "404")
+            {
+                return RedirectToAction("Error");
+            }
+
+            TempData[ID] = results["data"].ToString();
+
+            return RedirectToAction("Results", new { ID });
+        }
+
         [HttpGet]
         public IActionResult Results(string ID)
         {
@@ -107,7 +126,7 @@ namespace CryptDetect.Controllers
             return View();
         }
 
-        public async Task<JObject> upload_files_testAsync(List<string> files, string sess_ID)
+        private async Task<JObject> upload_files_testAsync(List<string> files, string sess_ID)
         {
             var client = new HttpClient { 
             BaseAddress = new Uri("http://localhost:8001")
@@ -129,9 +148,27 @@ namespace CryptDetect.Controllers
             var result = await response.Content.ReadAsStringAsync();
             Debug.WriteLine(response.Content);
             return JObject.Parse(result);
+        }
+
+        private async Task<JObject> submitGithub(string URL, string ID)
+        {
+            var client = new HttpClient
+            {
+                BaseAddress = new Uri("http://localhost:8001")
+            };
+
+            MultipartFormDataContent content_stream = new MultipartFormDataContent();
+
+            content_stream.Add(new StringContent(URL), "userUpload");
+            content_stream.Add(new StringContent(ID), "sessionID");
+
+            var response = await client.PostAsync(new Uri("http://localhost:8001/file_upload"), content_stream);
+            var result = await response.Content.ReadAsStringAsync();
+            Debug.WriteLine(response.Content);
+            return JObject.Parse(result);
 
         }
-public IActionResult Error(string error)
+        public IActionResult Error(string error)
         {
             return View(error);
         }
