@@ -27,6 +27,7 @@ namespace CryptDetect.Controllers
             long size = files.Sum(f => f.Length);
 
             var fPaths = new List<string>();
+            var sess_ID = Guid.NewGuid().ToString();
             foreach (var file in files)
             {
                 string ext = Path.GetExtension(file.FileName);
@@ -41,7 +42,7 @@ namespace CryptDetect.Controllers
                     }
                 }
             }
-            JObject results = await upload_files_testAsync(fPaths);
+            JObject results = await upload_files_testAsync(fPaths, sess_ID);
 
             //No Match Found
             if(results["code"].ToString() == "404")
@@ -73,9 +74,7 @@ namespace CryptDetect.Controllers
             {
                 await stream.WriteAsync(text);
             }
-            JObject results = await upload_files_testAsync(new List<string> {fPath});
-
-
+            JObject results = await upload_files_testAsync(new List<string> {fPath}, ID);
 
             //No Match Found
             if (results["code"].ToString() == "404")
@@ -108,7 +107,7 @@ namespace CryptDetect.Controllers
             return View();
         }
 
-        public async Task<JObject> upload_files_testAsync(List<string> files)
+        public async Task<JObject> upload_files_testAsync(List<string> files, string sess_ID)
         {
             var client = new HttpClient { 
             BaseAddress = new Uri("http://localhost:8001")
@@ -120,8 +119,10 @@ namespace CryptDetect.Controllers
             {
                 var filename = Path.GetFileName(file);
                 var stream = System.IO.File.OpenRead(file);
-                content_stream.Add(new StreamContent(stream), "userUpload", @"\"+filename);
-                content_stream.Add(new StringContent("89078908"), "sessionID");
+                var fileContent = new StreamContent(stream);
+                fileContent.Headers.Add("Content-Type", "application/octet-stream");
+                content_stream.Add(fileContent, "userUpload", @"\"+filename);
+                content_stream.Add(new StringContent(sess_ID), "sessionID");
             }
 
             var response = await client.PostAsync(new Uri("http://localhost:8001/file_upload"), content_stream);
