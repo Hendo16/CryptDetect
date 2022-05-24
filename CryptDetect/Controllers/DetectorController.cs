@@ -44,9 +44,7 @@ namespace CryptDetect.Controllers
                 string ext = Path.GetExtension(file.FileName);
                 if(file.Length > 0)
                 {
-                    var fPath = Path.GetTempFileName();
-                    var fName = file.FileName;
-                    common.Name = fName;
+                    string fPath = System.IO.Path.GetTempPath() + Guid.NewGuid().ToString() + ext;
                     fPaths.Add(fPath);
 
                     using(var stream = new FileStream(fPath, FileMode.Create))
@@ -116,19 +114,20 @@ namespace CryptDetect.Controllers
 
         public async Task<JObject> upload_files_testAsync(List<string> files)
         {
-            //NEED TO UPDATE FOR MULTIPLE FILES, ONLY WORKS FOR A SINGLE FILE RIGHT NOW
-            //THIS IS ONLY FOR A SINGLE FILE, NEED TO FIGURE OUT HOW TO APPEND MULTIPLE FILES TO THE BODY
-            string filename = files[0];
-            var fName = common.Name;
-
             var client = new HttpClient { 
-                BaseAddress = new Uri("http://124.222.155.154:8001")
+            BaseAddress = new Uri("http://124.222.155.154:8001")
                 };
-            await using var stream = System.IO.File.OpenRead(filename);
-            using var content = new MultipartFormDataContent
+
+            MultipartFormDataContent content_stream = new MultipartFormDataContent();
+
+            foreach (var file in files)
             {
-                {new StreamContent(stream), "files", "\\" + fName }
-            };
+                var filename = Path.GetFileName(file);
+                var stream = System.IO.File.OpenRead(file);
+                content_stream.Add(new StreamContent(stream), "files", @"\"+filename);
+            }
+
+            using var content = content_stream;
 
             var response = await client.PostAsync(new Uri("http://124.222.155.154:8001/file_upload"),content);
             var result = await response.Content.ReadAsStringAsync();
