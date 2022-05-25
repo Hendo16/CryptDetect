@@ -74,10 +74,10 @@
     };
 
     function test () {
-        var formData ={
-            "sessionID": "22011121"
-        }
+       
         return new Promise((resolve, reject) => {
+            var sessionID = 22011121;
+
             var xhr = new XMLHttpRequest();
             xhr.open("POST", 'http://127.0.0.1:8001/download', true); 
             xhr.responseType = "blob"; 
@@ -104,15 +104,15 @@
             }
             };
 
-            xhr.send(formData);
+            xhr.send("sessionID=" + sessionID);
         })
     };
 
     function download_pdf () {
-        var formData ={
-            "sessionID": "22011121"
-        }
+
         return new Promise((resolve, reject) => {
+            var sessionID = 22011121;
+
             var xhr = new XMLHttpRequest();
             xhr.open("POST", 'http://127.0.0.1:8001/downloadpdf', true); 
             xhr.responseType = "blob"; 
@@ -139,7 +139,7 @@
             }
             };
 
-            xhr.send(formData);
+            xhr.send("sessionID=" + sessionID);
         })
     };
 </script>
