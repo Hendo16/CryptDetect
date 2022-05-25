@@ -3,7 +3,9 @@
     ViewData["Title"] = "Scan Repository";
     ViewData["Spacing"] = "mb-2";
 }
-
+<head>
+    <link rel="stylesheet" href="~/css/loading.css" />
+</head>
 <div class="container">
     <div class="row">
         <div class="col">
@@ -41,34 +43,40 @@
                     </svg>
                     Enter your Source code
                 </button>
+                <br/>
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#loadingModal">
+                    Test Loading Screen
+                </button>
         </div>
     </div>
 </div>
 <!--GitHub Modal-->
-<div class="modal fade" id="GitHubModal" tabindex="-1" role="dialog" aria-labelledby="GitHubModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="GitHubModalLabel">Please Enter GitHub Repository</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <div class="form-group">
-                    <input class="form-control" id="GitHubRepoInput" placeholder="https://github.com/Hendo16/CryptDetect.git">
+<form method="post" asp-controller="Detector" asp-action="GithubScan">
+    <div class="modal fade" id="GitHubModal" tabindex="-1" role="dialog" aria-labelledby="GitHubModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="GitHubModalLabel">Please Enter GitHub Repository</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
                 </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Back</button>
-                <button type="button" class="btn btn-primary">Analyse</button>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <input name="URL" class="form-control" id="GitHubRepoInput" placeholder="https://github.com/Hendo16/CryptDetect.git">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Back</button>
+                    <button id="btnSubmit"  type="submit" class="btn btn-primary">Analyse</button>
+                </div>
             </div>
         </div>
     </div>
-</div>
+</form>
 
 <!--Text Source Code Modal-->
-<form method="post" enctype="multipart/form-data" name="TextForm" asp-controller="Detector" asp-action="TextScan">
+<form method="post" asp-controller="Detector" asp-action="TextScan">
     <div class="modal fade" id="TextCodeModal" tabindex="-1" role="dialog" aria-labelledby="TextCodeModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -80,22 +88,18 @@
                 </div>
                 <div class="modal-body">
                     <div class="form-group">
-                        <textarea class="form-control" form="TextForm" id="CodeTextArea" name="text" rows="10"></textarea>
+                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="10" name="text"></textarea>
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Back</button>
-                    <input type="submit" class="btn btn-secondary" value="Analyze" />
+                    <button id="btnSubmit" type="submit" class="btn btn-primary" >Analyse</button>
                 </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Back</button>
-                <button type="button" class="btn btn-primary">Analyse</button>
             </div>
         </div>
     </div>
 </form>
-
+    
 <!--Upload File Modal-->
 <form method="post" enctype="multipart/form-data" asp-controller="Detector" asp-action="FileScan">
     <div class="modal fade" id="UploadFileModal" tabindex="-1" role="dialog" aria-labelledby="UploadFileModalLabel" aria-hidden="true">
@@ -112,10 +116,72 @@
                     <input type="file" name="files" multiple />
                 </div>
                 <div class="modal-footer">
-                    <input type="submit" class="btn btn-secondary" value="Submit" />
+                    <button type="submit" class="btn btn-primary" id="btnSubmit" >Submit</button>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Back</button>
                 </div>
             </div>
         </div>
     </div>
 </form>
+
+
+<!--Loading Modal-->
+<div class="modal fade" id="loadingModal" tabindex="-1" role="dialog" aria-labelledby="loadingModalTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-5 offset-md-5">
+                            <img src="./Images/loading.gif"/>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-5 offset-md-5">
+                            <p id="loading_text">Analysing your source code</p>
+                        </div>
+                        <button onclick="load()">
+                            Test Loading
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+$("#btnSubmit").click(function(e) {
+    $('#GitHubModal').modal('hide');
+    $('#TextCodeModal').modal('hide');
+    $('#UploadFileModal').modal('hide');
+    $('#loadingModal').modal('toggle');
+    load();
+});
+
+const timer = ms => new Promise(res => setTimeout(res, ms))
+async function load () {
+    var count = 0;
+    var base_text = "Analysing your source code";
+    var max_time = 120;
+    while (count < max_time) {
+        //Incremental Text Updates
+        if (count >= 12) {
+            base_text = "Still Analysing";
+        }
+        if (count >= 20) {
+            base_text = "Wanna grab a coffee?"
+        }
+        if (count == max_time) {
+            document.getElementById("loading_text").textContent = "Almost there";
+        }
+        else {
+            for (var i = 0; i < 3; i++) {
+                document.getElementById("loading_text").append(".");  
+                await timer(1000);
+            }
+            count += 3;
+            document.getElementById("loading_text").textContent = base_text;
+        }
+    }
+}
+</script>

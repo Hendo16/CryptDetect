@@ -11,6 +11,7 @@ using System.Net.Http.Json;
 using Newtonsoft.Json.Linq;
 using CryptDetect.Models;
 using Newtonsoft.Json;
+using System.Diagnostics;
 
 public static  class common // static 不是必须
 
@@ -39,6 +40,7 @@ namespace CryptDetect.Controllers
             long size = files.Sum(f => f.Length);
 
             var fPaths = new List<string>();
+            var sess_ID = Guid.NewGuid().ToString();
             foreach (var file in files)
             {
                 string ext = Path.GetExtension(file.FileName);
@@ -53,12 +55,18 @@ namespace CryptDetect.Controllers
                     }
                 }
             }
-            JObject results = await upload_files_testAsync(fPaths);
+            JObject results = await upload_files_testAsync(fPaths, sess_ID);
 
             //No Match Found
             if(results["code"].ToString() == "404")
             {
-                return RedirectToAction("Error");
+                return RedirectToAction("Error", "no match");
+            }
+
+            //Wrong File Type
+            if (results["code"].ToString() == "123")
+            {
+                return RedirectToAction("Error", "wrong type");
             }
 
             string ID = Guid.NewGuid().ToString();
@@ -79,7 +87,26 @@ namespace CryptDetect.Controllers
             {
                 await stream.WriteAsync(text);
             }
-            JObject results = await upload_files_testAsync(new List<string> {fPath});
+            JObject results = await upload_files_testAsync(new List<string> {fPath}, ID);
+
+            //No Match Found
+            if (results["code"].ToString() == "404")
+            {
+                return RedirectToAction("Error");
+            }
+
+            TempData[ID] = results["data"].ToString();
+
+            return RedirectToAction("Results", new { ID });
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> GithubScan(string URL)
+        {
+            //Pull files from the repo
+            string ID = Guid.NewGuid().ToString();
+
+            JObject results = await submitGithub(URL, ID);
 
             //No Match Found
             if (results["code"].ToString() == "404")
@@ -112,10 +139,10 @@ namespace CryptDetect.Controllers
             return View();
         }
 
-        public async Task<JObject> upload_files_testAsync(List<string> files)
+        private async Task<JObject> upload_files_testAsync(List<string> files, string sess_ID)
         {
             var client = new HttpClient { 
-            BaseAddress = new Uri("http://124.222.155.154:8001")
+            BaseAddress = new Uri("http://localhost:8001")
                 };
 
             MultipartFormDataContent content_stream = new MultipartFormDataContent();
@@ -124,19 +151,39 @@ namespace CryptDetect.Controllers
             {
                 var filename = Path.GetFileName(file);
                 var stream = System.IO.File.OpenRead(file);
-                content_stream.Add(new StreamContent(stream), "files", @"\"+filename);
+                var fileContent = new StreamContent(stream);
+                fileContent.Headers.Add("Content-Type", "application/octet-stream");
+                content_stream.Add(fileContent, "userUpload", @"\"+filename);
+                content_stream.Add(new StringContent(sess_ID), "sessionID");
             }
 
-            using var content = content_stream;
-
-            var response = await client.PostAsync(new Uri("http://124.222.155.154:8001/file_upload"),content);
+            var response = await client.PostAsync(new Uri("http://localhost:8001/file_upload"), content_stream);
             var result = await response.Content.ReadAsStringAsync();
+            Debug.WriteLine(response.Content);
+            return JObject.Parse(result);
+        }
+
+        private async Task<JObject> submitGithub(string URL, string ID)
+        {
+            var client = new HttpClient
+            {
+                BaseAddress = new Uri("http://localhost:8001")
+            };
+
+            MultipartFormDataContent content_stream = new MultipartFormDataContent();
+
+            content_stream.Add(new StringContent(URL), "userUpload");
+            content_stream.Add(new StringContent(ID), "sessionID");
+
+            var response = await client.PostAsync(new Uri("http://localhost:8001/file_upload"), content_stream);
+            var result = await response.Content.ReadAsStringAsync();
+            Debug.WriteLine(response.Content);
             return JObject.Parse(result);
 
         }
-public IActionResult Error()
+        public IActionResult Error(string error)
         {
-            return View();
+            return View(error);
         }
     }
 }
