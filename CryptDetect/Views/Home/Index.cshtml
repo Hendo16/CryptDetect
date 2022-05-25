@@ -2,12 +2,14 @@
     ViewData["Title"] = "Home Page";
 
 }
+<!-- For when the website shrinks  -->
 <div class="container d-lg-none d-md-none">
-    <!--  -->
+    <!-- Information portion of the webpage to allow users to understand our product and its usefulness.  -->
     <div class="ml-1 p-1" style="width: 49.8%; display: table-cell; text-align: center; ">
         <h3>Identify Blockchain Systems</h3>
         <hr />
-        <p><i>A unique tool that allows detection of existing open source blockchain systems through analysing your source code.</i></p>
+        <p><i>CryptDetect is a unique tool developed by students of University of Wollongong, Australia, in which it that scans for existing open source blockchain systems through analysing your source code and reports back to you with a list of results. </i></p>
+        <p><i>Under the hood this works by extracting the lines in your supplied code and compares each line to known Cryptographic algorithms and libraries. In turn this allows for the system to quantitively measure and determine a relationship between the keywords in the lines of code and a blockchain implementation. </i></p>
         <br />
         <div style="text-align:center;">
             <a class="nav-link text-white" asp-area="" asp-controller="Detector" asp-action="Index" asp-action="Try Now"><span><u>Try Now!</u></span></a>
@@ -59,6 +61,8 @@
 
 </div>
 
+<!-- Div for when the page is at full scale  -->
+<!-- Information portion of the webpage to allow users to understand our product and its usefulness.  -->
 <div class="container d-none d-sm-none d-md-block">
     <div style="width: 100%; display: table;">
         <div style="display: table-row; height: 100px;">
@@ -71,7 +75,8 @@
                     <h3>Identify Blockchain Systems</h3>
                    
                     <hr />
-                    <p><i>A unique tool that allows detection of existing open source blockchain systems through analysing your source code.</i></p>
+                    <p><i>CryptDetect is a unique tool developed by students of University of Wollongong, Australia, in which it that scans for existing open source blockchain systems through analysing your source code and reports back to you with a list of results. </i></p>
+                    <p><i>Under the hood this works by extracting the lines in your supplied code and compares each line to known Cryptographic algorithms and libraries. In turn this allows for the system to quantitively measure and determine a relationship between the keywords in the lines of code and a blockchain implementation. </i></p>
                     <br />
                     <div style="text-align:center;"> 
                         <a class="nav-link text-white" asp-area="" asp-controller="Detector" asp-action="Index" asp-action="Try Now"><span><u>Try Now!</u></span></a>

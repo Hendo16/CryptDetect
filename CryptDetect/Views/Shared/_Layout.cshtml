@@ -15,18 +15,19 @@
     <!-- Container for Header 
          The nav bar and it's items are contained here in an unordered list -->
     <header>
-        <!--  -->
+        <!-- Navbar inline css rules to make it toggleable and expanding -->
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light border-0 border-light">
             <div class="container-fluid p-0">
-                <!--  -->
+                <!-- Controller called for the Home index page when clicking on our Logo -->
                 <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index"><img src="/Images/logo.png" alt="CryptDetect" class="navbar-brand" width="225"/></a>
-                <!--  -->
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
-                <!--  -->
+                <!-- Div containing our nav items in an unordered list, each is connected to a asp controller 
+                     Each List Item has inline css that our site.css piggybacks off of
+                     Here we build the basis of the nav-items shape, such as pill boxes that are rounded -->
                 <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row">
                     <ul class="navbar-nav">
                         <!-- Nav-Item: Try Now -->
@@ -61,7 +62,6 @@
          Contains Project Name along with publishing year.
          Links to UOW
          Links to Contact Us -->
-    
     <div class="footer-basic">
         <footer class="footer">
             <table class="footer-table" width="100%">
@@ -73,7 +73,7 @@
                     <td width="33%">
                         <ul class="list-inline">
                             <li class="list-inline-item"><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
-                            <li class="list-inline-item"><a asp-area="" asp-controller="Detector" asp-action="Index" asp-action="Try Now">Services</a></li>
+                            <li class="list-inline-item"><a href="https://github.com/Wind-River/crypto-detector">Wind-River</a></li>
                             <li class="list-inline-item"><a href="mailto:tristgardner@gmail.com">Contact Us</a></li>
                         </ul>
                     </td>
