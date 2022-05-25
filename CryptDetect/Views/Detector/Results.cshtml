@@ -44,45 +44,19 @@
 
 
 <script type="text/javascript">
-    document.getElementById('downloadtxt').onclick = test; 
+    document.getElementById('downloadtxt').onclick = download_txt; 
     document.getElementById('downloadpdf').onclick = download_pdf;
 
     function download_txt () {
-        $.ajax({
-            url:'http://127.0.0.1:8001/download',
-            type:'POST',
-
-            dataType:'JSON',
-            data:{"sessionID": '22011121'},
-            responseType: "blob"
-            })
-            .then(res => {
-                console.log(res)
-                let url  = window.URL.createObjectURL(new Blob([res.data]));
-                console.log(url)
-                let link = document.createElement('a');
-                
-                link.href = url;
-                link.setAttribute('download', "22011121.txt");
-                document.body.appendChild(link);
-                link.click();
-                window.URL.revokeObjectURL(url);
-                document.removeChild(link);
-                resolve(200)
-            })
-            .catch(res => {})
-    };
-
-    function test () {
        
         return new Promise((resolve, reject) => {
-            var sessionID = 22011121;
+            var sessionID = "fda9e3df-08c5-4825-9c8d-a0a2b508a75f";
 
             var xhr = new XMLHttpRequest();
             xhr.open("POST", 'http://127.0.0.1:8001/download', true); 
             xhr.responseType = "blob"; 
             xhr.dataType = 'JSON',
-            xhr.data = {"sessionID": '22011121'}
+            xhr.data = {"sessionID": 'fda9e3df-08c5-4825-9c8d-a0a2b508a75f'}
             
             xhr.onload = function () {
 
@@ -94,7 +68,7 @@
                 reader.onload = function (e) {
 
                 var a = document.createElement("a");
-                a.download = "22011121.txt";
+                a.download = "fda9e3df-08c5-4825-9c8d-a0a2b508a75f.txt";
                 a.href = e.target.result;
                 $("body").append(a); 
                 a.click();
@@ -111,13 +85,13 @@
     function download_pdf () {
 
         return new Promise((resolve, reject) => {
-            var sessionID = 22011121;
+            var sessionID = "fda9e3df-08c5-4825-9c8d-a0a2b508a75f";
 
             var xhr = new XMLHttpRequest();
             xhr.open("POST", 'http://127.0.0.1:8001/downloadpdf', true); 
             xhr.responseType = "blob"; 
             xhr.dataType = 'JSON',
-            xhr.data = {"sessionID": '22011121'}
+            xhr.data = {"sessionID": "fda9e3df-08c5-4825-9c8d-a0a2b508a75f"}
             
             xhr.onload = function () {
 
@@ -129,7 +103,7 @@
                 reader.onload = function (e) {
 
                 var a = document.createElement("a");
-                a.download = "22011121.pdf";
+                a.download = "fda9e3df-08c5-4825-9c8d-a0a2b508a75f.pdf";
                 a.href = e.target.result;
                 $("body").append(a); 
                 a.click();
