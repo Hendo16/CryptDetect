@@ -58,7 +58,7 @@
     </div>
 </div>
 <!--GitHub Modal-->
-<form method="post" asp-controller="Detector" asp-action="GithubScan">
+<form id="gitForm" method="post" asp-controller="Detector" asp-action="GithubScan">
     <div class="modal fade" id="GitHubModal" tabindex="-1" role="dialog" aria-labelledby="GitHubModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -83,7 +83,7 @@
 </form>
 
 <!--Text Source Code Modal-->
-<form method="post" asp-controller="Detector" asp-action="TextScan">
+<form id="codeForm" method="post" asp-controller="Detector" asp-action="TextScan">
     <div class="modal fade" id="TextCodeModal" tabindex="-1" role="dialog" aria-labelledby="TextCodeModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -108,7 +108,7 @@
 </form>
     
 <!--Upload File Modal-->
-<form method="post" enctype="multipart/form-data" asp-controller="Detector" asp-action="FileScan">
+<form id="uploadForm" method="post" enctype="multipart/form-data" asp-controller="Detector" asp-action="FileScan">
     <div class="modal fade" id="UploadFileModal" tabindex="-1" role="dialog" aria-labelledby="UploadFileModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -156,12 +156,29 @@
     </div>
 </div>
 <script>
-$("#btnSubmit").click(function(e) {
-    $('#GitHubModal').modal('hide');
-    $('#TextCodeModal').modal('hide');
+$("#uploadForm").submit(function (e) {
     $('#UploadFileModal').modal('hide');
     $('#loadingModal').modal('toggle');
     load();
+});
+
+$("#codeForm").submit(function (e) {
+    $('#TextCodeModal').modal('hide');
+    $('#loadingModal').modal('toggle');
+    load();
+});
+
+$("#gitForm").submit(function (e) {
+    e.preventDefault();
+    if (!$("#GitHubRepoInput").val().includes("github"), !$("#GitHubRepoInput").val().includes(".git")) {
+        alert("Error: Invalid GitHub link provided.");
+    }
+    else {
+        $('#GitHubModal').modal('hide');
+        $('#loadingModal').modal('toggle');
+        load();
+        $("#gitForm").submit();
+    }
 });
 
 const timer = ms => new Promise(res => setTimeout(res, ms))

@@ -61,13 +61,13 @@ namespace CryptDetect.Controllers
             //No Match Found
             if(results["code"].ToString() == "404")
             {
-                return RedirectToAction("Error", "no match");
+                return RedirectToAction("Error", "Couldn't find a match.");
             }
 
             //Wrong File Type
             if (results["code"].ToString() == "123")
             {
-                return RedirectToAction("Error", "wrong type");
+                return RedirectToAction("Error", "Wrong File Type Provied.");
             }
 
             string ID = Guid.NewGuid().ToString();
