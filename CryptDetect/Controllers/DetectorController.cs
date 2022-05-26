@@ -12,6 +12,7 @@ using Newtonsoft.Json.Linq;
 using CryptDetect.Models;
 using Newtonsoft.Json;
 using System.Diagnostics;
+using Microsoft.AspNetCore.Cors;
 
 public static  class common // static 不是必须
 

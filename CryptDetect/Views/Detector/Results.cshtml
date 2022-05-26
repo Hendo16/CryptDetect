@@ -4,7 +4,6 @@
 @{
     ViewData["Title"] = "Results";
 }
-
 <link rel="stylesheet" href="~/css/circle.css" />
 <div class="d-flex justify-content-center">
 
@@ -30,60 +29,33 @@
         }
     </div>
 
-    <button id = "downloadtxt" class="download btn" style="width: 13rem;height: 13 rem">
+    <button onclick="download_txt()" id = "downloadtxt" class="download btn" style="width: 13rem;height: 13 rem">
         download Text
     </button>
-    <button id = "downloadpdf" class="download btn" style="width: 13rem;height: 13 rem">
+    <button onclick="download_pdf()" id = "downloadpdf" class="download btn" style="width: 13rem;height: 13 rem">
         download PDF
     </button>
     
 
 </div>
 
-
-
-
 <script type="text/javascript">
-    document.getElementById('downloadtxt').onclick = download_txt; 
-    document.getElementById('downloadpdf').onclick = download_pdf;
-
-    function download_txt () {
-       
-        return new Promise((resolve, reject) => {
-            var sessionID = "fda9e3df-08c5-4825-9c8d-a0a2b508a75f";
-
-            var xhr = new XMLHttpRequest();
-            xhr.open("POST", 'http://127.0.0.1:8001/download', true); 
-            xhr.responseType = "blob"; 
-            xhr.dataType = 'JSON',
-            xhr.data = {"sessionID": 'fda9e3df-08c5-4825-9c8d-a0a2b508a75f'}
-            
-            xhr.onload = function () {
-
-            if (this.status === 200) {
-
-                var blob = this.response;
-                var reader = new FileReader();
-                reader.readAsDataURL(blob);
-                reader.onload = function (e) {
-
-                var a = document.createElement("a");
-                a.download = "fda9e3df-08c5-4825-9c8d-a0a2b508a75f.txt";
-                a.href = e.target.result;
-                $("body").append(a); 
-                a.click();
-                resolve(200)
-                $(a).remove();
-                };
+    function download_txt() {
+        console.log("AAAAAAAAAA");
+        $.ajax({
+            type: "GET",
+            url: 'http://127.0.0.1:8001/download',
+            data: JSON.stringify({"sessionID":"gyhukkgj"}),
+            async: true,
+            dataType: 'jsonp',   //you may use jsonp for cross origin request
+            crossDomain: true,
+            success: function(data, status, xhr) {
+                alert(xhr.getResponseHeader('Location'));
             }
-            };
-
-            xhr.send("sessionID=" + sessionID);
         })
     };
 
-    function download_pdf () {
-
+    function download_pdf() {
         return new Promise((resolve, reject) => {
             var sessionID = "fda9e3df-08c5-4825-9c8d-a0a2b508a75f";
 

@@ -1,12 +1,11 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
-
-}
+﻿<!-- For when the website shrinks  -->
 <div class="container d-lg-none d-md-none">
+    <!-- Information portion of the webpage to allow users to understand our product and its usefulness.  -->
     <div class="ml-1 p-1" style="width: 49.8%; display: table-cell; text-align: center; ">
         <h3>Identify Blockchain Systems</h3>
         <hr />
-        <p><i>A unique tool that allows detection of existing open source blockchain systems through analysing your source code.</i></p>
+        <p><i>CryptDetect is a unique tool developed by students of University of Wollongong, Australia, in which it that scans for existing open source blockchain systems through analysing your source code and reports back to you with a list of results. </i></p>
+        <p><i>Under the hood this works by extracting the lines in your supplied code and compares each line to known Cryptographic algorithms and libraries. In turn this allows for the system to quantitively measure and determine a relationship between the keywords in the lines of code and a blockchain implementation. </i></p>
         <br />
         <div style="text-align:center;">
             <a class="nav-link text-white" asp-area="" asp-controller="Detector" asp-action="Index" asp-action="Try Now"><span><u>Try Now!</u></span></a>
@@ -57,27 +56,31 @@
     </div>
 
 </div>
+
+<!-- Div for when the page is at full scale  -->
+<!-- Information portion of the webpage to allow users to understand our product and its usefulness.  -->
 <div class="container d-none d-sm-none d-md-block">
     <div style="width: 100%; display: table;">
         <div style="display: table-row; height: 100px;">
-            
+
             <!--START OF: Identify Blockchain Systems -->
             <!--Left hand table cell -->  
             <!--People read left to right therefore our information about our product should be placed here. -->  
             <div class="ml-1 p-1" style="width: 49.8%; display: table-cell; text-align: center; ">
-            
+
                     <h3>Identify Blockchain Systems</h3>
-                   
+
                     <hr />
-                    <p><i>A unique tool that allows detection of existing open source blockchain systems through analysing your source code.</i></p>
+                    <p><i>CryptDetect is a unique tool developed by students of University of Wollongong, Australia, in which it that scans for existing open source blockchain systems through analysing your source code and reports back to you with a list of results. </i></p>
+                    <p><i>Under the hood this works by extracting the lines in your supplied code and compares each line to known Cryptographic algorithms and libraries. In turn this allows for the system to quantitively measure and determine a relationship between the keywords in the lines of code and a blockchain implementation. </i></p>
                     <br />
                     <div style="text-align:center;"> 
                         <a class="nav-link text-white" asp-area="" asp-controller="Detector" asp-action="Index" asp-action="Try Now"><span><u>Try Now!</u></span></a>
                     </div>
-                
+
             </div>
             <!--END OF: Identify Blockchain Systems -->
-            
+
             <!--Padding from the top of the Navbar of the entire Table -->
             <div class="d-flex" style="height: 150px;"></div>
 
@@ -96,17 +99,13 @@
                     <i>
 
                         <div style="width: 6%; display: table-cell; text-align: center; "></div>
-
+                        
                         <div style="width: 28%; display: table-cell; text-align: center; ">
-                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="71" height="96" viewBox="0 -10 71 96">
-                                <defs>
-                                    <pattern id="pattern" preserveAspectRatio="none" width="100%" height="100%" viewBox="0 0 71 75">
-                                        <image width="71" height="75" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFEAAABWCAYAAAC3inqOAAAAAXNSR0IArs4c6QAABAF0RVh0bXhmaWxlACUzQ214ZmlsZSUyMGhvc3QlM0QlMjJhcHAuZGlhZ3JhbXMubmV0JTIyJTIwbW9kaWZpZWQlM0QlMjIyMDIxLTEwLTEyVDA2JTNBNDIlM0EyNy41OTdaJTIyJTIwYWdlbnQlM0QlMjI1LjAlMjAoV2luZG93cyUyME5UJTIwMTAuMCUzQiUyMFdpbjY0JTNCJTIweDY0KSUyMEFwcGxlV2ViS2l0JTJGNTM3LjM2JTIwKEtIVE1MJTJDJTIwbGlrZSUyMEdlY2tvKSUyMENocm9tZSUyRjk0LjAuNDYwNi43MSUyMFNhZmFyaSUyRjUzNy4zNiUyMiUyMGV0YWclM0QlMjJrNjNpeEsyM1pkYzF0OXdUazFmdyUyMiUyMHZlcnNpb24lM0QlMjIxNS41LjElMjIlMjB0eXBlJTNEJTIyZGV2aWNlJTIyJTNFJTNDZGlhZ3JhbSUyMGlkJTNEJTIyXzVkbjZIcXB4aWJwR05nUmJ0UFclMjIlMjBuYW1lJTNEJTIyUGFnZS0xJTIyJTNFalpOZFQlMkJzd0RJWiUyRlRTOUJhYVBCdUdSbHdBVWcwS1REdVR2S1d0TkdTJTJCc3FkYmVPWDM4YzZtNnJHQkpYVFI2JTJGJTJGcWp0UkRxdCUyQmdkdm12SVpjM0JSb3ZJJTJCMG5kUmtzUkpvdmdUeUY2SW1zMEdVbmliQ3p1Q2xmMkVVU2kwc3ptMEV5RWhPckxORkdaWTE1RFJoQm52Y1RlVmZhQ2JabTFNQWQlMkZBS2pQdU8zMjNPWlVEbmMlMkZVa1QlMkJDTGNveGM2ekVVcGxSTEtBdFRZNjdFNlNYa1U0OUlnMm5xayUyRkJoZTZOZlJuODduJTJCd0hncnpVTk52SE5iJTJCWmRPa2VuWDcxclYlMkYxWiUyQm45Tm5OTCUyQktySWN6V3VFNyUyQldLcWwlMkZkaUNMWGl5M0pFbnN3YjNpcTBsaXpXYjFraUVWYVFYSlZXTzd6RWZSJTJCMnRzMFhRRURaTWpkd3lMaFU4ZzVZOGJpQkZoM3k3cTdIbVZJc1A2OXlJb2tRck5WUFhPb2hMMDRSU3FyNElTM1pwUGpzUGx4bnYyajky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" />
-                                    </pattern>
-                                </defs>
-                                <rect id="Source" width="71" height="75" fill="url(#pattern)" />
-                            </svg>
-                            <p style="text-align:center; ">1. Provide us with your source code</p>
+                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="71" height="96" viewBox="0 -10 71 96">
+                            <image width="71" height="75" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFEAAABWCAYAAAC3inqOAAAAAXNSR0IArs4c6QAABAF0RVh0bXhmaWxlACUzQ214ZmlsZSUyMGhvc3QlM0QlMjJhcHAuZGlhZ3JhbXMubmV0JTIyJTIwbW9kaWZpZWQlM0QlMjIyMDIxLTEwLTEyVDA2JTNBNDIlM0EyNy41OTdaJTIyJTIwYWdlbnQlM0QlMjI1LjAlMjAoV2luZG93cyUyME5UJTIwMTAuMCUzQiUyMFdpbjY0JTNCJTIweDY0KSUyMEFwcGxlV2ViS2l0JTJGNTM3LjM2JTIwKEtIVE1MJTJDJTIwbGlrZSUyMEdlY2tvKSUyMENocm9tZSUyRjk0LjAuNDYwNi43MSUyMFNhZmFyaSUyRjUzNy4zNiUyMiUyMGV0YWclM0QlMjJrNjNpeEsyM1pkYzF0OXdUazFmdyUyMiUyMHZlcnNpb24lM0QlMjIxNS41LjElMjIlMjB0eXBlJTNEJTIyZGV2aWNlJTIyJTNFJTNDZGlhZ3JhbSUyMGlkJTNEJTIyXzVkbjZIcXB4aWJwR05nUmJ0UFclMjIlMjBuYW1lJTNEJTIyUGFnZS0xJTIyJTNFalpOZFQlMkJzd0RJWiUyRlRTOUJhYVBCdUdSbHdBVWcwS1REdVR2S1d0TkdTJTJCc3FkYmVPWDM4YzZtNnJHQkpYVFI2JTJGJTJGcWp0UkRxdCUyQmdkdm12SVpjM0JSb3ZJJTJCMG5kUmtzUkpvdmdUeUY2SW1zMEdVbmliQ3p1Q2xmMkVVU2kwc3ptMEV5RWhPckxORkdaWTE1RFJoQm52Y1RlVmZhQ2JabTFNQWQlMkZBS2pQdU8zMjNPWlVEbmMlMkZVa1QlMkJDTGNveGM2ekVVcGxSTEtBdFRZNjdFNlNYa1U0OUlnMm5xayUyRkJoZTZOZlJuODduJTJCd0hncnpVTk52SE5iJTJCWmRPa2VuWDcxclYlMkYxWiUyQm45Tm5OTCUyQktySWN6V3VFNyUyQldLcWwlMkZkaUNMWGl5M0pFbnN3YjNpcTBsaXpXYjFraUVWYVFYSlZXTzd6RWZSJTJCMnRzMFhRRURaTWpkd3lMaFU4ZzVZOGJpQkZoM3k3cTdIbVZJc1A2OXlJb2tRck5WUFhPb2hMMDRSU3FyNElTM1pwUGpzUGx4bnYyajky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" />
+                            <rect id="Source" width="71" height="75" fill="url(#pattern)" />
+                        </svg>
+                        <p style="text-align:center; ">1. Provide us with your source code</p>
                         </div>
 
                         <div style="width: 5%; display: table-cell; text-align: center; "></div>
@@ -134,4 +133,4 @@
             <!--END OF: How It Works -->
         </div>
     </div>
-</div>
+</div> 
