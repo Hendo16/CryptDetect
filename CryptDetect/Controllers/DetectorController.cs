@@ -120,6 +120,7 @@ namespace CryptDetect.Controllers
             return RedirectToAction("Results", new { ID });
         }
 
+        [EnableCors()]
         [HttpGet]
         public IActionResult Results(string ID)
         {
