@@ -66,7 +66,7 @@
                 </div>
                 <div class="modal-body">
                     <div class="form-group">
-                        <input name="URL" class="form-control" id="GitHubRepoInput" placeholder="https://github.com/Hendo16/CryptDetect.git">
+                        <input name="URL" class="form-control" id="GitHubRepoInput" placeholder="https://github.com/Hendo16/CryptDetect.git"> 
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -79,7 +79,7 @@
 </form>
 
 <!--Text Source Code Modal-->
-<form id="codeForm" method="post" asp-controller="Detector" asp-action="TextScan">
+<form class="needs-validation" id="codeForm" method="post" asp-controller="Detector" asp-action="TextScan">
     <div class="modal fade" id="TextCodeModal" tabindex="-1" role="dialog" aria-labelledby="TextCodeModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -91,7 +91,7 @@
                 </div>
                 <div class="modal-body">
                     <div class="form-group">
-                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="10" name="text"></textarea>
+                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="10" name="text" required></textarea>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -149,6 +149,7 @@
     </div>
 </div>
 <script>
+
 $("#uploadForm").submit(function (e) {
     $('#UploadFileModal').modal('hide');
     $('#loadingModal').modal('toggle');
@@ -162,16 +163,9 @@ $("#codeForm").submit(function (e) {
 });
 
 $("#gitForm").submit(function (e) {
-    e.preventDefault();
-    if (!$("#GitHubRepoInput").val().includes("github"), !$("#GitHubRepoInput").val().includes(".git")) {
-        alert("Error: Invalid GitHub link provided.");
-    }
-    else {
-        $('#GitHubModal').modal('hide');
-        $('#loadingModal').modal('toggle');
-        load();
-        $("#gitForm").submit();
-    }
+    $('#GitHubModal').modal('hide');
+    $('#loadingModal').modal('toggle');
+    load();
 });
 
 const timer = ms => new Promise(res => setTimeout(res, ms))
